@@ -68,6 +68,7 @@ jobs:
           - { os: ubuntu-latest  , target: i686-unknown-linux-musl     , use-cross: use-cross }
           - { os: ubuntu-latest  , target: x86_64-unknown-linux-gnu    , use-cross: use-cross }
           - { os: ubuntu-latest  , target: x86_64-unknown-linux-musl   , use-cross: use-cross }
+          - { os: macos-latest   , target: aarch64-apple-darwin        , use-cross: use-cross }
           - { os: macos-latest   , target: x86_64-apple-darwin }
           - { os: windows-latest , target: i686-pc-windows-gnu }
           - { os: windows-latest , target: i686-pc-windows-msvc }
@@ -156,7 +157,7 @@ jobs:
         echo set-output name=CARGO_USE_CROSS::${CARGO_USE_CROSS:-<empty>/false}
         echo ::set-output name=CARGO_USE_CROSS::${CARGO_USE_CROSS}
         # * test only binary for arm-type targets
-        unset CARGO_TEST_OPTIONS ; case ${{ matrix.job.target }} in arm-* | aarch64-*-linux-*) CARGO_TEST_OPTIONS="--bin ${PROJECT_NAME}" ;; esac;
+        unset CARGO_TEST_OPTIONS ; case ${{ matrix.job.target }} in arm-* | aarch64-*) CARGO_TEST_OPTIONS="--bin ${PROJECT_NAME}" ;; esac;
         echo set-output name=CARGO_TEST_OPTIONS::${CARGO_TEST_OPTIONS}
         echo ::set-output name=CARGO_TEST_OPTIONS::${CARGO_TEST_OPTIONS}
         # * strip executable?
